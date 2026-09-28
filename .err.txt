@@ -1,5 +1,3 @@
 ---DART ERRORS---
-../../../../.pub-cache/hosted/pub.dev/record_linux-0.7.2/lib/record_linux.dart:12:7: Error: The non-abstract class 'RecordLinux' is missing implementations for these members:
-../../../../.pub-cache/hosted/pub.dev/record_linux-0.7.2/lib/record_linux.dart:36:16: Error: The method 'RecordLinux.hasPermission' has fewer named arguments than those of overridden method 'RecordMethodChannelPlatformInterface.hasPermission'.
-lib/service/service_core.dart:67:22: Error: The method 'setForegroundNotificationInfo' isn't defined for the class 'ServiceInstance'.
+/home/runner/work/class-helper/class-helper/app/android/app/src/main/AndroidManifest.xml:43:13-37 Error:
 ---GRADLE---
