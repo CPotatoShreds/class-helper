@@ -67,14 +67,21 @@ jobs:
         working-directory: app
         run: |
           [ -f build_output.log ] || exit 0
-          {
-            grep -B3 -A30 "What went wrong" build_output.log || true
-            echo "---LOG TAIL---"
-            tail -c 6000 build_output.log
-          } > err_context.txt
-          ESC=$(sed 's/%/%25/g; s/\r/%0D/g; s/\n/%0A/g' err_context.txt)
-          echo "::error::ERR1 ${ESC:0:3800}"
-          echo "::error::ERR2 ${ESC:3800:3000}"
+          python3 - <<'PY'
+          import re
+          log = open('build_output.log', encoding='utf-8', errors='ignore').read()
+          i = log.find('* Where:')
+          if i == -1:
+              i = log.rfind('FAILURE: Build failed')
+              i = max(i, 0)
+          j = log.find('BUILD FAILED', i)
+          block = log[i : j + 2500] if j != -1 else log[i : i + 8000]
+          if not block.strip():
+              block = log[-6000:]
+          esc = block.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          for k in range(0, min(len(esc), 30000), 3500):
+              print(f'::error::E{k//3500} {esc[k:k+3500]}')
+          PY
 
       - uses: actions/upload-artifact@v4
         with:
