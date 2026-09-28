@@ -84,15 +84,20 @@ jobs:
           import re
           log = open('build_output.log', encoding='utf-8', errors='ignore').read()
           i = log.find('* Where:')
-          if i == -1:
-              i = log.rfind('FAILURE: Build failed')
-              i = max(i, 0)
           j = log.find('BUILD FAILED', i)
-          block = log[i : j + 2500] if j != -1 else log[i : i + 8000]
-          if not block.strip():
-              block = log[-6000:]
-          esc = block.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
-          for k in range(0, min(len(esc), 30000), 3500):
+          gradle_block = log[i : j + 2500] if i != -1 and j != -1 else ''
+          # Dart 编译错误行（kernel/compiler 输出在日志中部）
+          dart_lines = []
+          for line in log.splitlines():
+              if ('Error:' in line or 'error •' in line
+                      or re.match(r'\s*(lib|test)/.*\.dart:\d+', line)
+                      or 'Target kernel_snapshot failed' in line):
+                  dart_lines.append(line.strip())
+          dart_block = '\n'.join(dict.fromkeys(dart_lines))
+          text = ('---DART ERRORS---\n' + (dart_block or '(none captured)'))[:12000] \
+                 + '\n---GRADLE---\n' + gradle_block
+          esc = text.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+          for k in range(0, min(len(esc), 32000), 3500):
               print(f'::error::E{k//3500} {esc[k:k+3500]}')
           PY
 
