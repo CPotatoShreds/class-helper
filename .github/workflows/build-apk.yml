@@ -41,8 +41,11 @@ jobs:
           for f in android/app/build.gradle android/app/build.gradle.kts; do
             [ -f "$f" ] || continue
             sed -i -E 's/minSdk\s*=\s*flutter\.minSdkVersion/minSdk = 23/g; s/minSdkVersion\s+flutter\.minSdkVersion/minSdkVersion 23/g' "$f"
-            grep -n minSdk "$f" || true
+            # 新版 androidx 传递依赖要求 compileSdk 35，而 Flutter 3.24 模板固定 34
+            sed -i -E 's/compileSdk\s*=\s*flutter\.compileSdkVersion/compileSdk = 35/g; s/compileSdkVersion\s+flutter\.compileSdkVersion/compileSdkVersion 35/g' "$f"
+            grep -n -E "minSdk|compileSdk" "$f" || true
           done
+          echo "android.suppressUnsupportedCompileSdk=35" >> android/gradle.properties
 
       - name: Pub get
         working-directory: app
@@ -54,7 +57,24 @@ jobs:
 
       - name: Build APK
         working-directory: app
-        run: flutter build apk --release
+        run: |
+          set -o pipefail
+          flutter build apk --release 2>&1 | tee build_output.log
+
+      # 日志接口需管理员权限，改用 annotation 通道把报错带出（匿名 API 可读）
+      - name: Emit failure context as annotations
+        if: failure()
+        working-directory: app
+        run: |
+          [ -f build_output.log ] || exit 0
+          {
+            grep -B3 -A30 "What went wrong" build_output.log || true
+            echo "---LOG TAIL---"
+            tail -c 6000 build_output.log
+          } > err_context.txt
+          ESC=$(sed 's/%/%25/g; s/\r/%0D/g; s/\n/%0A/g' err_context.txt)
+          echo "::error::ERR1 ${ESC:0:3800}"
+          echo "::error::ERR2 ${ESC:3800:3000}"
 
       - uses: actions/upload-artifact@v4
         with:

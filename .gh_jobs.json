@@ -1,0 +1,153 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 108953855072,
+      "run_id": 36430124115,
+      "workflow_name": "build-apk",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/CPotatoShreds/class-helper/actions/runs/36430124115",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUwRKd88AAAAZXifkYA",
+      "head_sha": "491532b0ee658cdb2d0a5fd35a639e5f805b7403",
+      "url": "https://api.github.com/repos/CPotatoShreds/class-helper/actions/jobs/108953855072",
+      "html_url": "https://github.com/CPotatoShreds/class-helper/actions/runs/36430124115/job/108953855072",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-28T13:39:10Z",
+      "started_at": "2026-09-28T13:39:11Z",
+      "completed_at": "2026-09-28T13:42:24Z",
+      "name": "build",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-28T13:39:12Z",
+          "completed_at": "2026-09-28T13:39:14Z"
+        },
+        {
+          "name": "Run actions/checkout@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-28T13:39:14Z",
+          "completed_at": "2026-09-28T13:39:15Z"
+        },
+        {
+          "name": "Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-28T13:39:15Z",
+          "completed_at": "2026-09-28T13:39:15Z"
+        },
+        {
+          "name": "Run subosito/flutter-action@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-28T13:39:15Z",
+          "completed_at": "2026-09-28T13:39:47Z"
+        },
+        {
+          "name": "Flutter info",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-28T13:39:47Z",
+          "completed_at": "2026-09-28T13:40:01Z"
+        },
+        {
+          "name": "Generate android scaffolding",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-28T13:40:01Z",
+          "completed_at": "2026-09-28T13:40:09Z"
+        },
+        {
+          "name": "Apply manifest overlay and minSdk=23",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-28T13:40:09Z",
+          "completed_at": "2026-09-28T13:40:09Z"
+        },
+        {
+          "name": "Pub get",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-28T13:40:09Z",
+          "completed_at": "2026-09-28T13:40:10Z"
+        },
+        {
+          "name": "Dependency tree",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-28T13:40:10Z",
+          "completed_at": "2026-09-28T13:40:10Z"
+        },
+        {
+          "name": "Build APK",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 10,
+          "started_at": "2026-09-28T13:40:10Z",
+          "completed_at": "2026-09-28T13:42:21Z"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11,
+          "started_at": "2026-09-28T13:42:21Z",
+          "completed_at": "2026-09-28T13:42:21Z"
+        },
+        {
+          "name": "Post Run subosito/flutter-action@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20,
+          "started_at": "2026-09-28T13:42:21Z",
+          "completed_at": "2026-09-28T13:42:21Z"
+        },
+        {
+          "name": "Post Run actions/setup-java@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-09-28T13:42:21Z",
+          "completed_at": "2026-09-28T13:42:21Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-09-28T13:42:21Z",
+          "completed_at": "2026-09-28T13:42:21Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-09-28T13:42:21Z",
+          "completed_at": "2026-09-28T13:42:21Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/CPotatoShreds/class-helper/check-runs/108953855072",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000084,
+      "runner_name": "GitHub Actions 1000000084",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}
