@@ -228,5 +228,16 @@ class ServiceCore {
 @pragma('vm:entry-point')
 Future<void> serviceEntryPoint(ServiceInstance service) async {
   DartPluginRegistrant.ensureInitialized();
-  ServiceCore.start(service);
+  try {
+    ServiceCore.start(service);
+  } catch (e, st) {
+    // 后台 isolate 崩溃会连带杀进程，把错误送回 UI 而不是闪退
+    try {
+      service.invoke('event', {
+        'type': 'conn',
+        'status': 'error',
+        'detail': 'service isolate: $e\n$st',
+      });
+    } catch (_) {}
+  }
 }

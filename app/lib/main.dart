@@ -42,6 +42,8 @@ Future<void> _configureService() async {
       isForegroundMode: true,
       autoStartOnBoot: false,
       autoStart: false,
+      // Android 14 + targetSdk 34：startForeground 必须显式带类型，否则进程崩溃
+      foregroundServiceTypes: [AndroidForegroundType.microphone],
       notificationChannelId: 'class_helper_fg',
       initialNotificationTitle: 'class-helper',
       initialNotificationContent: '服务运行中',
