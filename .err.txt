@@ -1,3 +1,0 @@
----DART ERRORS---
-/home/runner/work/class-helper/class-helper/app/android/app/src/main/AndroidManifest.xml:43:13-37 Error:
----GRADLE---

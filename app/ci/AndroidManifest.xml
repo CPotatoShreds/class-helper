@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
         <!-- flutter_background_service 的前台服务：录音类型，锁屏/切后台存活 -->
+        <!-- exported 交给库 manifest 声明，避免合并冲突 -->
         <service
             android:name="id.flutter.flutter_background_service.BackgroundService"
-            android:foregroundServiceType="microphone"
-            android:exported="false"/>
+            android:foregroundServiceType="microphone"/>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
