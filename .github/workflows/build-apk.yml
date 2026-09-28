@@ -55,6 +55,19 @@ jobs:
         working-directory: app
         run: flutter pub deps --style=compact | head -60 || true
 
+      # 插件子项目在 CI 上拿不到 flutter 扩展（如 record_android 的
+      # `compileSdk = flutter.compileSdkVersion`），统一替换为字面值
+      - name: Patch plugin build.gradle flutter.* references
+        run: |
+          find "$HOME/.pub-cache/hosted/pub.dev" -name build.gradle -path "*/android/*" -exec sed -i -E \
+            -e 's/flutter\.compileSdkVersion/35/g' \
+            -e 's/flutter\.minSdkVersion/23/g' \
+            -e 's/flutter\.targetSdkVersion/34/g' \
+            -e 's/flutter\.ndkVersion/"26.1.10909125"/g' \
+            -e 's/flutter\.versionCode/1/g' \
+            -e 's/flutter\.versionName/"0.1.0"/g' \
+            {} + && echo "patched: $(grep -rl 'flutter\.' $HOME/.pub-cache/hosted/pub.dev --include=build.gradle | wc -l) files still reference flutter.*"
+
       - name: Build APK
         working-directory: app
         run: |
