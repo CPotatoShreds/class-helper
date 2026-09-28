@@ -84,8 +84,12 @@ jobs:
           import re
           log = open('build_output.log', encoding='utf-8', errors='ignore').read()
           i = log.find('* Where:')
+          if i == -1:
+              i = log.rfind('FAILURE: Build failed')
+          if i == -1:
+              i = max(0, len(log) - 6000)
           j = log.find('BUILD FAILED', i)
-          gradle_block = log[i : j + 2500] if i != -1 and j != -1 else ''
+          gradle_block = log[i : j + 2500] if j != -1 else log[i : i + 8000]
           # Dart 编译错误行（kernel/compiler 输出在日志中部）
           dart_lines = []
           lines = log.splitlines()
