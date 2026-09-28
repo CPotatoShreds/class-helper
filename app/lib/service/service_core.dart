@@ -64,7 +64,10 @@ class ServiceCore {
 
   Future<void> _updateNotification(String title, String content) async {
     try {
-      await _service.setForegroundNotificationInfo(title: title, content: content);
+      final inst = _service;
+      if (inst is AndroidServiceInstance) {
+        await inst.setForegroundNotificationInfo(title: title, content: content);
+      }
     } on PlatformException {
       // 通知不可用时忽略
     }

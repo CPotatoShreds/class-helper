@@ -20,6 +20,12 @@ dependencies:
   permission_handler: ^11.3.1
   http: ^1.2.2
 
+# record 家族 2026 年新版本与旧平台包接口不兼容（record_linux 0.7.2 编译失败），
+# 钉回与 Flutter 3.24 同期的 2024 版本组合
+dependency_overrides:
+  record_platform_interface: 1.2.0
+  record_android: 1.2.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
