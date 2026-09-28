@@ -1,0 +1,26 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+config.toml
+
+# 归档产物
+archives/
+
+# Flutter / Android
+app/build/
+app/.dart_tool/
+app/.flutter-plugins*
+app/android/
+app/ios/
+app/.idea/
+*.iml
+
+# 其他
+.DS_Store
+*.log
+tts.wav
+# ZCode 本地产物
+.zcode/

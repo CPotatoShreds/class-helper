@@ -1,0 +1,57 @@
+# class-helper 配置
+# 复制为 config.toml 并填入你的实际值：cp config.example.toml config.toml
+
+[server]
+# 服务监听地址与端口；App 用 ws://<本机局域网IP>:<port>/ws?token=<token> 连接
+host = "0.0.0.0"
+port = 8765
+# 连接令牌：App 首次连接时填写，防止局域网内他人未授权使用
+token = "change-me-please"
+
+[llm]
+# 任意 OpenAI 兼容服务（智谱/DeepSeek/Kimi/Qwen/OpenAI...）
+base_url = "https://open.bigmodel.cn/api/paas/v4"
+api_key = "sk-xxxx"
+# 检测用小快模型（高频调用，选便宜/免费的）
+detection_model = "glm-4-flash"
+# 速答用强模型（质量优先）
+answer_model = "glm-4-plus"
+timeout_seconds = 20
+
+[asr]
+# 模型档位：auto = 有GPU用 medium，无GPU用 small；也可显式指定
+# tiny / base / small / medium / large-v3 / large-v3-turbo
+model = "auto"
+# auto / cpu / cuda
+device = "auto"
+# auto：cuda→float16，cpu→int8
+compute = "auto"
+# 转写语言，留空自动检测
+language = "zh"
+
+[detection]
+# 老师喊到这些名字/称呼时最高优先级告警（维护你自己的别名单）
+aliases = ["陈嘉毅", "嘉毅"]
+# 关键词预筛：转写文本命中任意一词才调 LLM 确认（控制成本）
+trigger_words = [
+    "这位同学", "那位同学", "你来", "你来回答", "你来回答一下",
+    "抽一位", "抽一个", "抽个", "提问", "回答一下", "回答一下这个问题",
+    "思考一下", "想一想", "说一说", "说一下", "谈一谈", "点个名",
+    "点个同学", "谁来", "举个手", "后面的同学", "靠窗的同学",
+    "穿白色衣服", "戴眼镜的同学", "第一排的", "最后一排的", "中间那位",
+]
+# 送 LLM 分级时携带的课堂上下文窗口长度（秒）
+context_window_seconds = 90
+# 同级别告警的冷却时间（秒），防止刷屏
+cooldown_seconds = 30
+# 手动「我被点了」时回看多久的课堂内容作答（秒）
+manual_context_seconds = 120
+
+[archive]
+# 归档根目录（相对运行目录）
+root = "archives"
+# 是否保留原始音频
+keep_audio = true
+# 增量小结触发：距上次小结超过该秒数 且 新增字数超过阈值
+summary_interval_seconds = 300
+summary_interval_chars = 800

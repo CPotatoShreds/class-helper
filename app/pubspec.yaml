@@ -1,0 +1,29 @@
+name: class_helper_app
+description: "class-helper 移动端：课堂收音、点名告警与速答"
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # 前台服务：切后台/锁屏/划掉应用后仍持续采集
+  flutter_background_service: ^5.1.0
+  # 流式 PCM 录音
+  record: ^5.1.2
+  web_socket_channel: ^3.0.1
+  flutter_local_notifications: ^17.2.3
+  shared_preferences: ^2.3.2
+  flutter_markdown: ^0.7.4
+  permission_handler: ^11.3.1
+  http: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
