@@ -25,3 +25,4 @@ tts.wav
 # ZCode 本地产物
 .zcode/
 .gh_*
+.dl.py
